@@ -71,8 +71,9 @@ class OglasSeeder extends Seeder
             'karoserija_id'  => $hecbek,
         ]);
 
-        Fotografija::create(['oglas_id' => $astra->id, 'putanja' => 'images/demo/astra1.jpg']);
-        Fotografija::create(['oglas_id' => $astra->id, 'putanja' => 'images/demo/astra2.jpg']);
+        Fotografija::create(['oglas_id' => $astra->id, 'putanja' => 'images/demo/corsa1.jpg']);
+        Fotografija::create(['oglas_id' => $astra->id, 'putanja' => 'images/demo/corsa2.jpg']);
+        Fotografija::create(['oglas_id' => $astra->id, 'putanja' => 'images/demo/corsa3.jpg']);
 
         // ============= VW PASSAT =============
         $passat = Oglas::create([
@@ -94,6 +95,7 @@ class OglasSeeder extends Seeder
 
         Fotografija::create(['oglas_id' => $passat->id, 'putanja' => 'images/demo/passat1.jpg']);
         Fotografija::create(['oglas_id' => $passat->id, 'putanja' => 'images/demo/passat2.jpg']);
+        Fotografija::create(['oglas_id' => $passat->id, 'putanja' => 'images/demo/passat3.jpg']);
 
         // ============= AUDI A4 =============
         $audi = Oglas::create([
@@ -116,5 +118,105 @@ class OglasSeeder extends Seeder
         Fotografija::create(['oglas_id' => $audi->id, 'putanja' => 'images/demo/audi1.jpg']);
         Fotografija::create(['oglas_id' => $audi->id, 'putanja' => 'images/demo/audi2.jpg']);
         Fotografija::create(['oglas_id' => $audi->id, 'putanja' => 'images/demo/audi3.jpg']);
+
+        // ============= BMW 320d 2014 =============
+        $bmw = Oglas::create([
+            'user_id'        => $user->id,
+            'naslov'         => 'BMW 320d 2014',
+            'marka'          => 'BMW',
+            'model'          => '320d',
+            'godiste'        => 2014,
+            'cena'           => 11500,
+            'opis'           => 'Odlično očuvan, sportski paket, pun opreme.',
+            'kilometraza'    => 180000,
+            'snaga_motora'   => 163,
+            'boja'           => 'Crna',
+            'lokacija'       => 'Novi Sad',
+            'status'         => 'odobren',
+            'tip_goriva_id'  => $dizel,
+            'karoserija_id'  => $limuzina,
+        ]);
+        Fotografija::create(['oglas_id' => $bmw->id, 'putanja' => 'images/demo/bmw1.jpg']);
+        Fotografija::create(['oglas_id' => $bmw->id, 'putanja' => 'images/demo/bmw2.jpg']);
+
+        // ============= Mercedes C200 2015 =============
+        $mercedes = Oglas::create([
+            'user_id'        => $user->id,
+            'naslov'         => 'Mercedes C200 2015',
+            'marka'          => 'Mercedes-Benz',
+            'model'          => 'C200',
+            'godiste'        => 2015,
+            'cena'           => 14500,
+            'opis'           => 'Perfektan enterijer i motor, AMG felne.',
+            'kilometraza'    => 150000,
+            'snaga_motora'   => 184,
+            'boja'           => 'Bela',
+            'lokacija'       => 'Beograd',
+            'status'         => 'odobren',
+            'tip_goriva_id'  => $benzinski,
+            'karoserija_id'  => $limuzina,
+        ]);
+        Fotografija::create(['oglas_id' => $mercedes->id, 'putanja' => 'images/demo/mercedes1.webp']);
+        Fotografija::create(['oglas_id' => $mercedes->id, 'putanja' => 'images/demo/mercedes2.jpg']);
+
+        // ============= Peugeot 308 2017 =============
+        $peugeot = Oglas::create([
+            'user_id'        => $user->id,
+            'naslov'         => 'Peugeot 308 2017',
+            'marka'          => 'Peugeot',
+            'model'          => '308',
+            'godiste'        => 2017,
+            'cena'           => 7800,
+            'opis'           => 'Mali potrošač, idealan gradski auto.',
+            'kilometraza'    => 95000,
+            'snaga_motora'   => 120,
+            'boja'           => 'Plava',
+            'lokacija'       => 'Niš',
+            'status'         => 'odobren',
+            'tip_goriva_id'  => $dizel,
+            'karoserija_id'  => $hecbek,
+        ]);
+        Fotografija::create(['oglas_id' => $peugeot->id, 'putanja' => 'images/demo/peugeot1.jpg']);
+        Fotografija::create(['oglas_id' => $peugeot->id, 'putanja' => 'images/demo/peugeot2.jpg']);
+
+        // ============= Ford Focus 2013 =============
+        $ford = Oglas::create([
+            'user_id'        => $user->id,
+            'naslov'         => 'Ford Focus 2013',
+            'marka'          => 'Ford',
+            'model'          => 'Focus',
+            'godiste'        => 2013,
+            'cena'           => 6200,
+            'opis'           => 'Praktičan i ekonomičan automobil.',
+            'kilometraza'    => 170000,
+            'snaga_motora'   => 115,
+            'boja'           => 'Siva',
+            'lokacija'       => 'Kragujevac',
+            'status'         => 'odobren',
+            'tip_goriva_id'  => $dizel,
+            'karoserija_id'  => $hecbek,
+        ]);
+        Fotografija::create(['oglas_id' => $ford->id, 'putanja' => 'images/demo/ford1.jpg']);
+
+        // ============= Renault Megane 2012 =============
+        $renault = Oglas::create([
+            'user_id'        => $user->id,
+            'naslov'         => 'Renault Megane 2012',
+            'marka'          => 'Renault',
+            'model'          => 'Megane',
+            'godiste'        => 2012,
+            'cena'           => 5000,
+            'opis'           => 'Pouzdan auto, registrovan do kraja godine.',
+            'kilometraza'    => 200000,
+            'snaga_motora'   => 110,
+            'boja'           => 'Crvena',
+            'lokacija'       => 'Subotica',
+            'status'         => 'odobren',
+            'tip_goriva_id'  => $dizel,
+            'karoserija_id'  => $karavan,
+        ]);
+        Fotografija::create(['oglas_id' => $renault->id, 'putanja' => 'images/demo/renault1.jpg']);
+        Fotografija::create(['oglas_id' => $renault->id, 'putanja' => 'images/demo/renault2.jpg']);
+
     }
 }

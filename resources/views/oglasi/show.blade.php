@@ -10,7 +10,7 @@
                     <div class="carousel-inner">
                         @foreach($oglas->fotografije as $index => $slika)
                             <div class="carousel-item @if($index==0) active @endif">
-                                <img src="{{ asset($slika->putanja) }}"
+                                <img src="{{ asset('storage/'.$slika->putanja) }}"
                                      class="d-block w-100 rounded"
                                      style="height:380px; object-fit:cover;"
                                      alt="{{ $oglas->naslov }}">

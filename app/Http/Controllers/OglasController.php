@@ -67,7 +67,7 @@ class OglasController extends Controller
             'boja' => 'required',
             'lokacija' => 'required',
             'slike' => 'required',
-            'slike.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'slike.*' => 'image|mimes:jpeg,png,jpg|max:4096'
         ]);
 
         $oglas = Oglas::create([
@@ -84,13 +84,22 @@ class OglasController extends Controller
             'snaga_motora'  => $request->snaga_motora,
             'boja'          => $request->boja,
             'lokacija'      => $request->lokacija,
-            'status'        => 'na_cekanju', // <<< ispravljeno
+            'status'        => 'na_cekanju',
         ]);
 
+        // Snimanje slika sa originalnim nazivom
         if ($request->hasFile('slike')) {
-            foreach ($request->file('slike') as $slika) {
-                $putanja = $slika->store('oglasi', 'public');
-                Fotografija::create(['oglas_id' => $oglas->id, 'putanja' => $putanja]);
+            foreach ($request->file('slike') as $index => $slika) {
+                $original = pathinfo($slika->getClientOriginalName(), PATHINFO_FILENAME);
+                $ext = $slika->getClientOriginalExtension();
+                $imeFajla = time() . '_' . $oglas->id . '_' . $index . '_' . \Str::slug($original) . '.' . $ext;
+
+                $slika->storeAs('oglasi', $imeFajla, 'public');
+
+                Fotografija::create([
+                    'oglas_id' => $oglas->id,
+                    'putanja' => 'oglasi/' . $imeFajla
+                ]);
             }
         }
 
@@ -202,5 +211,15 @@ class OglasController extends Controller
         }
         $oglas->delete();
         return redirect('/')->with('success', 'Oglas je obrisan.');
+    }
+
+    /** Moji oglasi */
+    public function mojiOglasi()
+    {
+        $oglasi = Oglas::where('user_id', Auth::id())
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+
+        return view('oglasi.moji', compact('oglasi'));
     }
 }

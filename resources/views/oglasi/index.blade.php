@@ -2,7 +2,8 @@
 @section('content')
 <h3 class="mb-3">Pretraga oglasa</h3>
 
-<form method="GET" action="/" class="mb-4">
+<div class="card shadow-sm p-3 mb-4">
+<form method="GET" action="/">
   <div class="form-row">
     <div class="form-group col-md-3">
       <label>Marka</label>
@@ -61,10 +62,10 @@
       </select>
     </div>
   </div>
-  <button type="submit" class="btn btn-secondary">Pretraži</button>
+  <button type="submit" class="btn btn-primary">🔎 Pretraži</button>
 </form>
+</div>
 
-<!-- Lista rezultata -->
 @if($oglasi->count() == 0)
   <p>Nema oglasa za prikaz.</p>
 @else
@@ -73,20 +74,17 @@
       <div class="col-md-4 mb-4">
         <div class="card h-100">
           @if($oglas->fotografije->count() > 0)
-            <img src="{{ asset($oglas->fotografije->first()->putanja) }}" 
-                 class="card-img-top" 
-                 alt="{{ $oglas->naslov }}">
+            <img src="{{ asset($oglas->fotografije->first()->putanja) }}" class="card-img-top" alt="{{ $oglas->naslov }}">
           @else
-            <img src="{{ asset('images/no-image.png') }}" 
-                 class="card-img-top" 
-                 alt="Nema slike">
+            <img src="{{ asset('images/no-image.png') }}" class="card-img-top" alt="Nema slike">
           @endif
 
           <div class="card-body">
             <h5 class="card-title">{{ $oglas->naslov }}</h5>
             <p class="card-text"><strong>Cena:</strong> {{ $oglas->cena }} €</p>
             <p class="card-text"><strong>Lokacija:</strong> {{ $oglas->lokacija }}</p>
-            <a href="{{ route('oglasi.show', $oglas->id) }}" class="btn btn-primary">Detaljnije</a>
+            <p class="card-text"><strong>kilometraza:</strong> {{ $oglas->kilometraza }}</p>
+            <a href="{{ route('oglasi.show', $oglas->id) }}" class="btn btn-primary btn-sm">Detaljnije</a>
           </div>
         </div>
       </div>
