@@ -54,6 +54,8 @@
                     @if(Auth::user()->is_admin)
                         <li class="nav-item"><a class="nav-link" href="{{ url('/admin/oglasi') }}">📑 Oglasi za proveru</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin.korisnici.index') }}">👥 Korisnici</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('marke.index') }}">🚘 Marke</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('modeli.index') }}">🛠️ Modeli</a></li>
                     @endif
                 @endauth
 

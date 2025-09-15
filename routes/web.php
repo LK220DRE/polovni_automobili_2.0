@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OglasController;
 use App\Http\Controllers\AdminOglasController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\MarkaController;   // ✅ dodato
+use App\Http\Controllers\ModelController;   // ✅ dodato
 
 // Autentikacija
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -22,7 +24,7 @@ Route::resource('oglasi', OglasController::class)->except(['index'])->parameters
 // Kontakt na oglasu
 Route::post('/oglasi/{oglas}/kontakt', [OglasController::class, 'kontakt'])->name('oglasi.kontakt');
 
-// routes/web.php
+// Korisničke rute
 Route::middleware('auth')->group(function () {
     Route::get('/moji-oglasi', [OglasController::class, 'mojiOglasi'])->name('oglasi.moji');
 });
@@ -33,13 +35,19 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/oglasi/{id}/odobri', [AdminOglasController::class, 'odobri']);
     Route::post('/admin/oglasi/{id}/odbij', [AdminOglasController::class, 'odbij']);
     Route::get('/admin/oglasi/cekaju', [AdminOglasController::class, 'cekaju'])
-    ->name('admin.oglasi.cekaju');
-
+        ->name('admin.oglasi.cekaju');
 
     // ✳️ Admin – korisnici
     Route::get('/admin/korisnici', [AdminUserController::class, 'index'])->name('admin.korisnici.index');
     Route::get('/admin/korisnici/{user}', [AdminUserController::class, 'show'])->name('admin.korisnici.show');
+    Route::delete('/admin/korisnici/{user}', [AdminUserController::class, 'destroy'])
+        ->name('admin.korisnici.destroy');
 
+    // Marke CRUD
+    Route::resource('marke', MarkaController::class)->except(['show','edit','update']);
+
+    // Modeli CRUD
+    Route::resource('modeli', ModelController::class)->except(['show','edit','update']);
 });
 
 // Statične stranice
