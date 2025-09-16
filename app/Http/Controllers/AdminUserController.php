@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUserController extends Controller
 {
@@ -17,14 +18,16 @@ class AdminUserController extends Controller
         $oglasi = $user->oglasi()->with(['fotografije','tipGoriva','karoserija'])->latest()->paginate(12);
         return view('admin.korisnici.show', compact('user','oglasi'));
     }
+
+    // ✅ Brisanje korisnika (osim samog sebe)
     public function destroy(User $user)
     {
-        if ($user->is_admin) {
-            return back()->with('error', 'Admin korisnici se ne mogu obrisati.');
+        if ($user->id === Auth::id()) {
+            return redirect()->back()->with('error', 'Ne možete obrisati sami sebe.');
         }
 
         $user->delete();
-        return redirect()->route('admin.korisnici.index')->with('success', 'Korisnik obrisan.');
-    }
 
+        return redirect()->route('admin.korisnici.index')->with('success', 'Korisnik je obrisan.');
+    }
 }
